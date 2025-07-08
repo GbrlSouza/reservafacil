@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReservaFácil - Sistema de Reservas para Espaços e Eventos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .gallery-item {
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .pricing-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            background-color: #f8fafc;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-calendar-check text-blue-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-blue-600">ReservaFácil</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Início</a>
+                    <a href="#about" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Sobre</a>
+                    <a href="#spaces" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Espaços</a>
+                    <a href="#pricing" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Preços</a>
+                    <a href="#testimonials" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Depoimentos</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Contato</a>
+                    <a href="#booking" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition duration-300">Reservar Agora</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Início</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Sobre</a>
+                <a href="#spaces" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Espaços</a>
+                <a href="#pricing" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Preços</a>
+                <a href="#testimonials" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Depoimentos</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Contato</a>
+                <a href="#booking" class="block w-full bg-blue-600 text-white px-4 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition duration-300 mt-2">Reservar Agora</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section flex items-center justify-center text-center text-white">
+        <div class="max-w-4xl px-6">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">Reserve o Espaço Perfeito para Seu Evento</h1>
+            <p class="text-xl md:text-2xl mb-8">Salões de festa, coworkings e quadras esportivas disponíveis para aluguel com facilidade e segurança.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#booking" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">Reservar Agora</a>
+                <a href="#spaces" class="bg-transparent hover:bg-white hover:text-blue-600 text-white font-bold py-3 px-6 border-2 border-white rounded-lg transition duration-300 transform hover:scale-105">Ver Espaços</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Sobre Nossos Espaços</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Locais perfeitos para transformar seus momentos em memórias inesquecíveis</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <div class="relative overflow-hidden rounded-xl shadow-xl">
+                        <div id="gallery-carousel" class="relative w-full h-96 overflow-hidden">
+                            <div class="gallery-item absolute inset-0 w-full h-full transition-opacity duration-500 opacity-0">
+                                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Salão de festas" class="w-full h-full object-cover">
+                            </div>
+                            <div class="gallery-item absolute inset-0 w-full h-full transition-opacity duration-500 opacity-0">
+                                <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Espaço coworking" class="w-full h-full object-cover">
+                            </div>
+                            <div class="gallery-item absolute inset-0 w-full h-full transition-opacity duration-500 opacity-0">
+                                <img src="https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Quadra esportiva" class="w-full h-full object-cover">
+                            </div>
+                            <div class="gallery-item absolute inset-0 w-full h-full transition-opacity duration-500 opacity-0">
+                                <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Tenda para eventos" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+                            <button class="gallery-dot w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 focus:outline-none"></button>
+                            <button class="gallery-dot w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 focus:outline-none"></button>
+                            <button class="gallery-dot w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 focus:outline-none"></button>
+                            <button class="gallery-dot w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 focus:outline-none"></button>
+                        </div>
+                        <button id="gallery-prev" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 text-gray-800 p-2 rounded-full focus:outline-none">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button id="gallery-next" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 text-gray-800 p-2 rounded-full focus:outline-none">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 mt-10 lg:mt-0">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Espaços Exclusivos para Seu Evento</h3>
+                    <p class="text-gray-600 mb-6">Nossos espaços são cuidadosamente selecionados e preparados para oferecer a melhor experiência para você e seus convidados. Com infraestrutura completa e atendimento personalizado, garantimos que seu evento seja um sucesso.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex items-start">
+                            <div class="feature-icon bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-wifi text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Wi-Fi de Alta Velocidade</h4>
+                                <p class="text-gray-600 text-sm">Internet rápida em todos os nossos espaços</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="feature-icon bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-parking text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Estacionamento</h4>
+                                <p class="text-gray-600 text-sm">Vagas exclusivas para seus convidados</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="feature-icon bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-utensils text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Cozinha Completa</h4>
+                                <p class="text-gray-600 text-sm">Equipada para preparar ou esquentar alimentos</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="feature-icon bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-music text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Sistema de Som</h4>
+                                <p class="text-gray-600 text-sm">Equipamento profissional para seu evento</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <a href="#spaces" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+                            Conheça todos nossos espaços
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spaces Section -->
+    <section id="spaces" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Nossos Espaços</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Diversas opções para atender todas as suas necessidades</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Space 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Salão de Festas Luxo" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-xl font-bold text-gray-900">Salão de Festas Luxo</h3>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">150 pessoas</span>
+                        </div>
+                        <p class="mt-2 text-gray-600">Espaço elegante e sofisticado para casamentos, aniversários e eventos corporativos.</p>
+                        <div class="mt-4 flex items-center">
+                            <i class="fas fa-map-marker-alt text-gray-400 mr-2"></i>
+                            <span class="text-sm text-gray-500">Centro, São Paulo</span>
+                        </div>
+                        <div class="mt-6 flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-900">A partir de R$ 1.500/dia</span>
+                            <a href="#booking" class="text-blue-600 hover:text-blue-800 font-medium">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Space 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Espaço Coworking" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-xl font-bold text-gray-900">Espaço Coworking Premium</h3>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">50 pessoas</span>
+                        </div>
+                        <p class="mt-2 text-gray-600">Ambiente moderno e produtivo para reuniões, workshops e trabalho em equipe.</p>
+                        <div class="mt-4 flex items-center">
+                            <i class="fas fa-map-marker-alt text-gray-400 mr-2"></i>
+                            <span class="text-sm text-gray-500">Vila Olímpia, São Paulo</span>
+                        </div>
+                        <div class="mt-6 flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-900">A partir de R$ 80/hora</span>
+                            <a href="#booking" class="text-blue-600 hover:text-blue-800 font-medium">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Space 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Quadra Esportiva" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-xl font-bold text-gray-900">Quadra Esportiva Completa</h3>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">30 pessoas</span>
+                        </div>
+                        <p class="mt-2 text-gray-600">Quadra poliesportiva para futebol, vôlei e basquete, com vestiários e arquibancada.</p>
+                        <div class="mt-4 flex items-center">
+                            <i class="fas fa-map-marker-alt text-gray-400 mr-2"></i>
+                            <span class="text-sm text-gray-500">Moema, São Paulo</span>
+                        </div>
+                        <div class="mt-6 flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-900">A partir de R$ 120/hora</span>
+                            <a href="#booking" class="text-blue-600 hover:text-blue-800 font-medium">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition duration-300">
+                    Ver Todos os Espaços
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Planos e Preços</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Opções flexíveis para todos os tipos de eventos</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Pricing Card 1 -->
+                <div class="pricing-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 transition-transform duration-300">
+                    <div class="px-6 py-8">
+                        <h3 class="text-2xl font-bold text-gray-900 text-center">Pacote Básico</h3>
+                        <div class="mt-6 flex justify-center">
+                            <span class="text-4xl font-extrabold text-gray-900">R$ 800</span>
+                            <span class="text-xl text-gray-500 mt-2 ml-1">/dia</span>
+                        </div>
+                        <p class="mt-4 text-gray-500 text-center">Ideal para eventos pequenos e reuniões</p>
+                    </div>
+                    <div class="border-t border-gray-200 px-6 py-8 bg-gray-50">
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Até 8 horas de uso</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Capacidade para 50 pessoas</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Mesa e cadeiras básicas</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Wi-Fi gratuito</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times text-red-400 mt-1 mr-2"></i>
+                                <span class="text-gray-500">Decoração não inclusa</span>
+                            </li>
+                        </ul>
+                        <div class="mt-8">
+                            <a href="#booking" class="block w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg text-center transition duration-300">
+                                Reservar Agora
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pricing Card 2 (Featured) -->
+                <div class="pricing-card bg-white rounded-xl shadow-2xl overflow-hidden border-2 border-blue-500 transform scale-105 z-10 transition-transform duration-300">
+                    <div class="px-6 py-8 bg-blue-500">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-2xl font-bold text-white">Pacote Premium</h3>
+                            <span class="bg-white text-blue-600 text-xs font-bold px-2 py-1 rounded-full">MAIS POPULAR</span>
+                        </div>
+                        <div class="mt-6 flex justify-center">
+                            <span class="text-4xl font-extrabold text-white">R$ 1.500</span>
+                            <span class="text-xl text-blue-100 mt-2 ml-1">/dia</span>
+                        </div>
+                        <p class="mt-4 text-blue-100 text-center">Perfeito para eventos médios e festas</p>
+                    </div>
+                    <div class="border-t border-gray-200 px-6 py-8 bg-gray-50">
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Até 12 horas de uso</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Capacidade para 100 pessoas</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Mobiliário premium</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Wi-Fi de alta velocidade</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Decoração básica inclusa</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Sistema de som simples</span>
+                            </li>
+                        </ul>
+                        <div class="mt-8">
+                            <a href="#booking" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-center transition duration-300">
+                                Reservar Agora
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pricing Card 3 -->
+                <div class="pricing-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 transition-transform duration-300">
+                    <div class="px-6 py-8">
+                        <h3 class="text-2xl font-bold text-gray-900 text-center">Pacote Luxo</h3>
+                        <div class="mt-6 flex justify-center">
+                            <span class="text-4xl font-extrabold text-gray-900">R$ 3.200</span>
+                            <span class="text-xl text-gray-500 mt-2 ml-1">/dia</span>
+                        </div>
+                        <p class="mt-4 text-gray-500 text-center">Para eventos grandes e casamentos</p>
+                    </div>
+                    <div class="border-t border-gray-200 px-6 py-8 bg-gray-50">
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Até 24 horas de uso</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Capacidade para 200 pessoas</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Mobiliário de luxo</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Wi-Fi empresarial</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Decoração premium</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Sistema de som profissional</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Iluminação especial</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Estacionamento VIP</span>
+                            </li>
+                        </ul>
+                        <div class="mt-8">
+                            <a href="#booking" class="block w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg text-center transition duration-300">
+                                Reservar Agora
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-blue-50 rounded-xl p-6">
+                <div class="md:flex items-center justify-between">
+                    <div class="md:w-2/3">
+                        <h3 class="text-xl font-bold text-gray-900">Precisa de algo personalizado?</h3>
+                        <p class="mt-2 text-gray-600">Oferecemos pacotes sob medida para atender às necessidades específicas do seu evento.</p>
+                    </div>
+                    <div class="mt-4 md:mt-0">
+                        <a href="#contact" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition duration-300">
+                            Fale Conosco
+                            <i class="fas fa-envelope ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">O Que Nossos Clientes Dizem</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Avaliações reais de pessoas que utilizaram nossos espaços</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-md transition-transform duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/women/32.jpg" alt="Maria Silva">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-bold text-gray-900">Maria Silva</h4>
+                            <p class="text-gray-500">Casamento - 15/05/2023</p>
+                        </div>
+                    </div>
+                    <div class="flex mb-2">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 italic">"O salão de festas foi perfeito para nosso casamento. A equipe foi extremamente atenciosa e o espaço superou todas nossas expectativas. Tudo estava impecável e nossos convidados adoraram!"</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-md transition-transform duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/men/44.jpg" alt="Carlos Oliveira">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-bold text-gray-900">Carlos Oliveira</h4>
+                            <p class="text-gray-500">Evento Corporativo - 22/08/2023</p>
+                        </div>
+                    </div>
+                    <div class="flex mb-2">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 italic">"Utilizamos o espaço de coworking para um treinamento de equipe e foi excelente. A infraestrutura é moderna, o Wi-Fi rápido e o atendimento impecável. Com certeza usaremos novamente para nossos próximos eventos."</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-md transition-transform duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ana Santos">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-bold text-gray-900">Ana Santos</h4>
+                            <p class="text-gray-500">Aniversário - 10/06/2023</p>
+                        </div>
+                    </div>
+                    <div class="flex mb-2">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star-half-alt text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 italic">"Fizemos a festa de 15 anos da minha filha no salão e foi maravilhoso! O espaço é lindo, bem decorado e a equipe nos ajudou em tudo. Só não dei 5 estrelas porque o estacionamento ficou um pouco cheio, mas no geral foi perfeito!"</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+                    Ver mais depoimentos
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16">
+                <div class="mb-12 lg:mb-0">
+                    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Reserve Seu Espaço</h2>
+                    <p class="mt-4 text-xl text-gray-500">Preencha o formulário e nossa equipe entrará em contato para confirmar sua reserva</p>
+                    
+                    <div class="mt-8 bg-blue-50 rounded-xl p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Por que reservar conosco?</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Confirmação imediata da disponibilidade</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Preços transparentes sem taxas escondidas</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Atendimento personalizado 24/7</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Cancelamento gratuito até 7 dias antes</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Perguntas Frequentes</h3>
+                        <div class="space-y-4">
+                            <div class="faq-item border border-gray-200 rounded-lg p-4 cursor-pointer">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="font-medium text-gray-900">Qual o prazo para confirmação da reserva?</h4>
+                                    <i class="fas fa-chevron-down text-gray-400"></i>
+                                </div>
+                                <p class="mt-2 text-gray-600 hidden">Nossa equipe responde em até 24 horas úteis após o envio do formulário. Para urgências, você pode nos chamar no WhatsApp.</p>
+                            </div>
+                            <div class="faq-item border border-gray-200 rounded-lg p-4 cursor-pointer">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="font-medium text-gray-900">Quais formas de pagamento são aceitas?</h4>
+                                    <i class="fas fa-chevron-down text-gray-400"></i>
+                                </div>
+                                <p class="mt-2 text-gray-600 hidden">Aceitamos Pix, cartão de crédito (até 12x), boleto bancário e transferência. O pagamento pode ser feito online ou presencialmente.</p>
+                            </div>
+                            <div class="faq-item border border-gray-200 rounded-lg p-4 cursor-pointer">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="font-medium text-gray-900">É possível visitar o espaço antes de reservar?</h4>
+                                    <i class="fas fa-chevron-down text-gray-400"></i>
+                                </div>
+                                <p class="mt-2 text-gray-600 hidden">Sim, agendamos visitas de segunda a sexta, das 9h às 18h. Basta entrar em contato para marcarmos o melhor horário para você.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-xl p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Solicitar Reserva</h3>
+                    <form id="booking-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Nome Completo</label>
+                            <input type="text" id="name" name="name" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
+                            <input type="email" id="email" name="email" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Telefone</label>
+                            <input type="tel" id="phone" name="phone" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="event-date" class="block text-sm font-medium text-gray-700">Data do Evento</label>
+                                <input type="date" id="event-date" name="event-date" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            
+                            <div>
+                                <label for="event-type" class="block text-sm font-medium text-gray-700">Tipo de Evento</label>
+                                <select id="event-type" name="event-type" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="">Selecione...</option>
+                                    <option value="casamento">Casamento</option>
+                                    <option value="aniversario">Aniversário</option>
+                                    <option value="corporativo">Evento Corporativo</option>
+                                    <option value="formatura">Formatura</option>
+                                    <option value="esportivo">Evento Esportivo</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="space-type" class="block text-sm font-medium text-gray-700">Espaço Desejado</label>
+                            <select id="space-type" name="space-type" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">Selecione...</option>
+                                <option value="salao-festa">Salão de Festas Luxo</option>
+                                <option value="coworking">Espaço Coworking Premium</option>
+                                <option value="quadra">Quadra Esportiva</option>
+                                <option value="tenda">Tenda para Eventos</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="guests" class="block text-sm font-medium text-gray-700">Número de Convidados</label>
+                            <input type="number" id="guests" name="guests" min="1" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700">Mensagem Adicional</label>
+                            <textarea id="message" name="message" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input id="terms" name="terms" type="checkbox" required class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            <label for="terms" class="ml-2 block text-sm text-gray-700">
+                                Concordo com os <a href="#" class="text-blue-600 hover:text-blue-800">Termos de Uso</a> e <a href="#" class="text-blue-600 hover:text-blue-800">Política de Privacidade</a>
+                            </label>
+                        </div>
+                        
+                        <div>
+                            <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300">
+                                Enviar Solicitação de Reserva
+                                <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Entre em Contato</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Estamos aqui para ajudar com todas suas dúvidas</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                        <i class="fas fa-phone-alt text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Telefone</h3>
+                    <p class="text-gray-500">(11) 1234-5678</p>
+                    <p class="text-gray-500 mt-1">(11) 98765-4321</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">E-mail</h3>
+                    <p class="text-gray-500">contato@reservafacil.com</p>
+                    <p class="text-gray-500 mt-1">reservas@reservafacil.com</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">WhatsApp</h3>
+                    <p class="text-gray-500">(11) 98765-4321</p>
+                    <a href="https://wa.me/5511987654321" class="inline-block mt-2 text-blue-600 hover:text-blue-800 font-medium">
+                        Enviar mensagem
+                        <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Horário de Funcionamento</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span class="text-gray-700">Segunda a Sexta</span>
+                            <span class="font-medium text-gray-900">8:00 - 20:00</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span class="text-gray-700">Sábado</span>
+                            <span class="font-medium text-gray-900">9:00 - 18:00</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span class="text-gray-700">Domingo</span>
+                            <span class="font-medium text-gray-900">9:00 - 14:00</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span class="text-gray-700">Feriados</span>
+                            <span class="font-medium text-gray-900">10:00 - 16:00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Nossas Redes Sociais</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="h-10 w-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center hover:bg-blue-200 transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="h-10 w-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center hover:bg-blue-200 transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="h-10 w-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center hover:bg-blue-200 transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="h-10 w-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center hover:bg-blue-200 transition duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="h-10 w-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center hover:bg-blue-200 transition duration-300">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mt-6 mb-4">Newsletter</h3>
+                    <p class="text-gray-600 mb-4">Receba ofertas exclusivas e novidades sobre nossos espaços</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Seu melhor e-mail" class="flex-grow border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                        <button type="submit" class="bg-blue-600 text-white px-4 rounded-r-md hover:bg-blue-700 transition duration-300">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <div class="h-96 w-full">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.287481864329!2d-46.66372672468611!3d-23.55810857880133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59d2b063f563%3A0x246236bc2e281b58!2sAv.%20Paulista%2C%201000%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001310-100!5e0!3m2!1spt-BR!2sbr!4v1684866141042!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold mb-4">ReservaFácil</h3>
+                    <p class="text-gray-400">Soluções completas para aluguel de espaços e eventos. Transformamos seus momentos em memórias inesquecíveis.</p>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Links Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white">Início</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white">Sobre</a></li>
+                        <li><a href="#spaces" class="text-gray-400 hover:text-white">Espaços</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white">Preços</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-white">Depoimentos</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Espaços</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Salão de Festas</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Espaço Coworking</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Quadras Esportivas</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tendas para Eventos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Salas de Reunião</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Espaços para Casamentos</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Informações</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Av. Paulista, 1000 - São Paulo/SP</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">contato@reservafacil.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">(11) 1234-5678</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fab fa-whatsapp mt-1 mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">(11) 98765-4321</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock mt-1 mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Seg-Sex: 8:00 - 20:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">© 2023 ReservaFácil. Todos os direitos reservados.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Termos de Uso</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Política de Privacidade</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">CNPJ: 12.345.678/0001-99</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Panel Modal (Hidden by default) -->
+    <div id="admin-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-screen overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Painel Administrativo</h2>
+                    <button id="close-admin-modal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Admin Navigation -->
+                <div class="mb-6">
+                    <div class="flex flex-wrap gap-2">
+                        <button class="admin-tab active px-4 py-2 bg-blue-600 text-white rounded-md" data-tab="bookings">Reservas</button>
+                        <button class="admin-tab px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300" data-tab="calendar">Calendário</button>
+                        <button class="admin-tab px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300" data-tab="clients">Clientes</button>
+                        <button class="admin-tab px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300" data-tab="payments">Pagamentos</button>
+                        <button class="admin-tab px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300" data-tab="reports">Relatórios</button>
+                    </div>
+                </div>
+                
+                <!-- Bookings Tab -->
+                <div id="bookings-tab" class="admin-tab-content">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-medium text-gray-900">Todas as Reservas</h3>
+                        <div class="flex space-x-2">
+                            <select class="border border-gray-300 rounded-md px-3 py-1 text-sm">
+                                <option>Filtrar por status</option>
+                                <option>Confirmadas</option>
+                                <option>Pendentes</option>
+                                <option>Canceladas</option>
+                            </select>
+                            <button class="bg-blue-600 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700">
+                                <i class="fas fa-plus mr-1"></i> Nova Reserva
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Espaço</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#12345</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Maria Silva</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Salão de Festas Luxo</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">15/05/2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Confirmada</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <button class="text-blue-600 hover:text-blue-900 mr-2"><i class="fas fa-eye"></i></button>
+                                        <button class="text-yellow-600 hover:text-yellow-900 mr-2"><i class="fas fa-edit"></i></button>
+                                        <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#12346</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Carlos Oliveira</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Espaço Coworking</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">22/08/2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pendente</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <button class="text-blue-600 hover:text-blue-900 mr-2"><i class="fas fa-eye"></i></button>
+                                        <button class="text-yellow-600 hover:text-yellow-900 mr-2"><i class="fas fa-edit"></i></button>
+                                        <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#12347</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Ana Santos</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Quadra Esportiva</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">10/06/2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Cancelada</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <button class="text-blue-600 hover:text-blue-900 mr-2"><i class="fas fa-eye"></i></button>
+                                        <button class="text-yellow-600 hover:text-yellow-900 mr-2"><i class="fas fa-edit"></i></button>
+                                        <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Calendar Tab -->
+                <div id="calendar-tab" class="admin-tab-content hidden">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Calendário de Reservas</h3>
+                    <div id="admin-calendar" class="h-96 bg-gray-100 rounded-lg p-4">
+                        <!-- Calendar will be rendered here -->
+                        <p class="text-center text-gray-500 mt-40">Calendário será implementado com FullCalendar.js</p>
+                    </div>
+                </div>
+                
+                <!-- Clients Tab -->
+                <div id="clients-tab" class="admin-tab-content hidden">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-medium text-gray-900">Todos os Clientes</h3>
+                        <div class="flex space-x-2">
+                            <input type="text" placeholder="Buscar cliente..." class="border border-gray-300 rounded-md px-3 py-1 text-sm">
+                            <button class="bg-blue-600 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
